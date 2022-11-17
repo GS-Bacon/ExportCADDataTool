@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{8F397235-38D5-46BF-A275-13C92C97F30D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportCADDataTool", "WindowsFormsApp1\ExportCADDataTool.csproj", "{8F397235-38D5-46BF-A275-13C92C97F30D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

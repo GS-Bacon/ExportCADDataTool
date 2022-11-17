@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
@@ -24,192 +20,216 @@ namespace WindowsFormsApp1
         }
     }
 }
-namespace SolidWorksAPIControl
+namespace SolidworksAPIControl
 {
     public class FileExport
     {
-        SldWorks swapp = new SldWorks();
-        public void ExportDxf(string filepath, string savepath)
+        SldWorks SolidworksApp = new SldWorks();
+        public void ExportDxf(string filePath, string exportFilePath)
         {
             try
             {
-                Debug.Print("dxf path:" + savepath + "\n");
-                ModelDoc2 swdoc;
-                ModelDocExtension swdocex = default(ModelDocExtension);
-                int fileerror = 0;
-                int filewarning = 0;
+                ModelDoc2 SolidworksDocument;
+                ModelDocExtension SolidworksModelExtension = default(ModelDocExtension);
+                int FileErro = 0;
+                int FileWarning = 0;
                 bool bRet;
-                string saveaspath;
-                saveaspath = savepath + "\\" + (string)Path.GetFileName(Path.ChangeExtension(filepath, ".DXF"));
+                string ExportFilePath;
+                ExportFilePath = exportFilePath + "\\" + (string)Path.GetFileName(Path.ChangeExtension(filePath, ".DXF"));
 
-                swdoc = (ModelDoc2)swapp.OpenDoc6(
-                    filepath,
+                SolidworksDocument = (ModelDoc2)SolidworksApp.OpenDoc6(
+                    filePath,
                     (int)swDocumentTypes_e.swDocDRAWING,
                     (int)swOpenDocOptions_e.swOpenDocOptions_Silent,
                     "",
-                    ref fileerror,
-                    ref filewarning
+                    ref FileErro,
+                    ref FileWarning
                     );
 
-                swdocex = (ModelDocExtension)swdoc.Extension;
+                SolidworksModelExtension = (ModelDocExtension)SolidworksDocument.Extension;
 
-                bRet = swdocex.SaveAs3(
-                    saveaspath,
+                bRet = SolidworksModelExtension.SaveAs3(
+                    ExportFilePath,
                     (int)swSaveAsVersion_e.swSaveAsCurrentVersion,
                     (int)swSaveAsOptions_e.swSaveAsOptions_Silent,
                     null,
                     null,
-                    ref fileerror,
-                    ref filewarning
+                    ref FileErro,
+                    ref FileWarning
                     );
 
-                swapp.CloseDoc(filepath);
+                SolidworksApp.CloseDoc(filePath);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
         }
-        public void ExportPdf(string filepath, string savepath)
+        public void ExportPdf(string filePath, string exportFilePath)
         {
+            try
+            {
+                ModelDoc2 SolidworksDocument;
+                ModelDocExtension SolidworksModelExtension = default(ModelDocExtension);
+                int FileErro = 0;
+                int FileWarning = 0;
+                bool bRet;
+                string ExportFilePath;
+                ExportFilePath = exportFilePath + "\\" + (string)Path.GetFileName(Path.ChangeExtension(filePath, ".pdf"));
 
-            ModelDoc2 swdoc;
-            ModelDocExtension swdocex = default(ModelDocExtension);
-            int fileerror = 0;
-            int filewarning = 0;
-            bool bRet;
-            string saveaspath;
-            saveaspath = savepath + "\\" + (string)Path.GetFileName(Path.ChangeExtension(filepath, ".pdf"));
+                SolidworksDocument = (ModelDoc2)SolidworksApp.OpenDoc6(
+                    filePath,
+                    (int)swDocumentTypes_e.swDocDRAWING,
+                    (int)swOpenDocOptions_e.swOpenDocOptions_Silent,
+                    "",
+                    ref FileErro,
+                    ref FileWarning
+                    );
 
-            swdoc = (ModelDoc2)swapp.OpenDoc6(
-                filepath,
-                (int)swDocumentTypes_e.swDocDRAWING,
-                (int)swOpenDocOptions_e.swOpenDocOptions_Silent,
-                "",
-                ref fileerror,
-                ref filewarning
-                );
+                SolidworksModelExtension = (ModelDocExtension)SolidworksDocument.Extension;
 
-            swdocex = (ModelDocExtension)swdoc.Extension;
+                bRet = SolidworksModelExtension.SaveAs3(
+                    ExportFilePath,
+                    (int)swSaveAsVersion_e.swSaveAsCurrentVersion,
+                    (int)swSaveAsOptions_e.swSaveAsOptions_Silent,
+                    null,
+                    null,
+                    ref FileErro,
+                    ref FileWarning
+                    );
 
-            bRet = swdocex.SaveAs3(
-                saveaspath,
-                (int)swSaveAsVersion_e.swSaveAsCurrentVersion,
-                (int)swSaveAsOptions_e.swSaveAsOptions_Silent,
-                null,
-                null,
-                ref fileerror,
-                ref filewarning
-                );
-
-            swapp.CloseDoc(filepath);
+                SolidworksApp.CloseDoc(filePath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
-        public void ExportStep(string filepath, string savepath)
+        public void ExportStep(string filePath, string exportFilePath)
         {
+            try
+            {
 
-            PartDoc swdoc = default(PartDoc);
-            ModelDoc2 swmodel;
-            ModelDocExtension swdocex = default(ModelDocExtension);
-            int fileerror = 0;
-            int filewarning = 0;
-            bool bRet = false;
-            string saveaspath;
-            saveaspath = savepath + "\\" + (string)Path.GetFileName(Path.ChangeExtension(filepath, ".STEP"));
+                PartDoc SolidworksDocumen = default(PartDoc);
+                ModelDoc2 SolidworksModel;
+                ModelDocExtension SolidworksModelExtension = default(ModelDocExtension);
+                int FileError = 0;
+                int FileWarning = 0;
+                bool bRet = false;
+                string ExportFilePath;
+                ExportFilePath = exportFilePath + "\\" + (string)Path.GetFileName(Path.ChangeExtension(filePath, ".STEP"));
 
-            swdoc = (PartDoc)swapp.OpenDoc6(
-                filepath,
-                (int)swDocumentTypes_e.swDocPART,
-                (int)swOpenDocOptions_e.swOpenDocOptions_Silent,
-                "",
-                ref fileerror,
-                ref filewarning
-                );
+                SolidworksDocumen = (PartDoc)SolidworksApp.OpenDoc6(
+                    filePath,
+                    (int)swDocumentTypes_e.swDocPART,
+                    (int)swOpenDocOptions_e.swOpenDocOptions_Silent,
+                    "",
+                    ref FileError,
+                    ref FileWarning
+                    );
 
-            swmodel = (ModelDoc2)swdoc;
-            swdocex = (ModelDocExtension)swmodel.Extension;
+                SolidworksModel = (ModelDoc2)SolidworksDocumen;
+                SolidworksModelExtension = (ModelDocExtension)SolidworksModel.Extension;
 
-            bRet = swdocex.SaveAs3(
-                saveaspath,
-                (int)swSaveAsVersion_e.swSaveAsCurrentVersion,
-                (int)swSaveAsOptions_e.swSaveAsOptions_Silent,
-                null,
-                null,
-                ref fileerror,
-                ref filewarning
-                );
-            swapp.CloseDoc(filepath);
-
-        }
-        public void ExportIges(string filepath, string savepath)
-        {
-
-            PartDoc swdoc = default(PartDoc);
-            ModelDoc2 swmodel;
-            ModelDocExtension swdocex = default(ModelDocExtension);
-            int fileerror = 0;
-            int filewarning = 0;
-            bool bRet = false;
-            string saveaspath;
-            saveaspath = savepath + "\\" + (string)Path.GetFileName(Path.ChangeExtension(filepath, ".IGS"));
-
-            swdoc = (PartDoc)swapp.OpenDoc6(
-                filepath,
-                (int)swDocumentTypes_e.swDocPART,
-                (int)swOpenDocOptions_e.swOpenDocOptions_Silent,
-                "",
-                ref fileerror,
-                ref filewarning
-                );
-
-            swmodel = (ModelDoc2)swdoc;
-            swdocex = (ModelDocExtension)swmodel.Extension;
-
-            bRet = swdocex.SaveAs3(
-                saveaspath,
-                (int)swSaveAsVersion_e.swSaveAsCurrentVersion,
-                (int)swSaveAsOptions_e.swSaveAsOptions_Silent,
-                null,
-                null,
-                ref fileerror,
-                ref filewarning
-                );
-            swapp.CloseDoc(filepath);
+                bRet = SolidworksModelExtension.SaveAs3(
+                    ExportFilePath,
+                    (int)swSaveAsVersion_e.swSaveAsCurrentVersion,
+                    (int)swSaveAsOptions_e.swSaveAsOptions_Silent,
+                    null,
+                    null,
+                    ref FileError,
+                    ref FileWarning
+                    );
+                SolidworksApp.CloseDoc(filePath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
 
         }
-        public void ExportStl(string filepath, string savepath)
+        public void ExportIges(string filePath, string exportFilePath)
         {
+            try
+            {
 
-            PartDoc swdoc = default(PartDoc);
-            ModelDoc2 swmodel;
-            ModelDocExtension swdocex = default(ModelDocExtension);
-            int fileerror = 0;
-            int filewarning = 0;
-            bool bRet = false;
-            string saveaspath;
-            saveaspath = savepath + "\\" + (string)Path.GetFileName(Path.ChangeExtension(filepath, ".STL"));
+                PartDoc SolidworksDocumen = default(PartDoc);
+                ModelDoc2 SolidworksModel;
+                ModelDocExtension SolidworksModelExtension = default(ModelDocExtension);
+                int FileError = 0;
+                int FileWarning = 0;
+                bool bRet = false;
+                string ExportFilePath;
+                ExportFilePath = exportFilePath + "\\" + (string)Path.GetFileName(Path.ChangeExtension(filePath, ".IGS"));
 
-            swdoc = (PartDoc)swapp.OpenDoc6(
-                filepath,
-                (int)swDocumentTypes_e.swDocPART,
-                (int)swOpenDocOptions_e.swOpenDocOptions_Silent,
-                "",
-                ref fileerror,
-                ref filewarning
-                );
+                SolidworksDocumen = (PartDoc)SolidworksApp.OpenDoc6(
+                    filePath,
+                    (int)swDocumentTypes_e.swDocPART,
+                    (int)swOpenDocOptions_e.swOpenDocOptions_Silent,
+                    "",
+                    ref FileError,
+                    ref FileWarning
+                    );
 
-            swmodel = (ModelDoc2)swdoc;
-            swdocex = (ModelDocExtension)swmodel.Extension;
+                SolidworksModel = (ModelDoc2)SolidworksDocumen;
+                SolidworksModelExtension = (ModelDocExtension)SolidworksModel.Extension;
 
-            bRet = swdocex.SaveAs3(
-                saveaspath,
-                (int)swSaveAsVersion_e.swSaveAsCurrentVersion,
-                (int)swSaveAsOptions_e.swSaveAsOptions_Silent,
-                null,
-                null,
-                ref fileerror,
-                ref filewarning
-                );
-            swapp.CloseDoc(filepath);
+                bRet = SolidworksModelExtension.SaveAs3(
+                    ExportFilePath,
+                    (int)swSaveAsVersion_e.swSaveAsCurrentVersion,
+                    (int)swSaveAsOptions_e.swSaveAsOptions_Silent,
+                    null,
+                    null,
+                    ref FileError,
+                    ref FileWarning
+                    );
+                SolidworksApp.CloseDoc(filePath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+        public void ExportStl(string filePath, string exportFilePath)
+        {
+            try
+            {
+                PartDoc SolidworksDocumen = default(PartDoc);
+                ModelDoc2 SolidworksModel;
+                ModelDocExtension SolidworksModelExtension = default(ModelDocExtension);
+                int FileError = 0;
+                int FileWarning = 0;
+                bool bRet = false;
+                string ExportFilePath;
+                ExportFilePath = exportFilePath + "\\" + (string)Path.GetFileName(Path.ChangeExtension(filePath, ".STL"));
+
+                SolidworksDocumen = (PartDoc)SolidworksApp.OpenDoc6(
+                    filePath,
+                    (int)swDocumentTypes_e.swDocPART,
+                    (int)swOpenDocOptions_e.swOpenDocOptions_Silent,
+                    "",
+                    ref FileError,
+                    ref FileWarning
+                    );
+
+                SolidworksModel = (ModelDoc2)SolidworksDocumen;
+                SolidworksModelExtension = (ModelDocExtension)SolidworksModel.Extension;
+
+                bRet = SolidworksModelExtension.SaveAs3(
+                    ExportFilePath,
+                    (int)swSaveAsVersion_e.swSaveAsCurrentVersion,
+                    (int)swSaveAsOptions_e.swSaveAsOptions_Silent,
+                    null,
+                    null,
+                    ref FileError,
+                    ref FileWarning
+                    );
+                SolidworksApp.CloseDoc(filePath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
 
         }
     }
