@@ -15,12 +15,14 @@ using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
+using SolidWorksAPIControl;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
         SldWorks swapp = new SldWorks();
+        SolidWorksAPIControl.FileExport SwFileExport = new SolidWorksAPIControl.FileExport();
         public Form1()
         {
             InitializeComponent();
