@@ -110,13 +110,13 @@ namespace WindowsFormsApp1
 
         private void ExportFolderBotton_Click(object sender, EventArgs e)
         {
-            var ofd = new CommonOpenFileDialog();
-            ofd.IsFolderPicker = true;
-            if (ofd.ShowDialog() != CommonFileDialogResult.Ok)
+            var OpenFileDialog = new CommonOpenFileDialog();
+            OpenFileDialog.IsFolderPicker = true;
+            if (OpenFileDialog.ShowDialog() != CommonFileDialogResult.Ok)
             {
                 return;
             }
-            ExportFolder.Items.Add(ofd.FileName);
+            ExportFolder.Items.Add(OpenFileDialog.FileName);
         }
 
         private void ExportFileDialog_FileOk(object sender, CancelEventArgs e)
