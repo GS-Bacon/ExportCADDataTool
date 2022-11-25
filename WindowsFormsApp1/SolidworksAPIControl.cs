@@ -8,7 +8,7 @@ namespace SolidworksAPIControl
     public class FileExport
     {
         SldWorks SolidworksApp = new SldWorks();
-        public void ExportDxf(string filePath, string exportFilePath)
+        public string ExportDxf(string filePath, string exportFilePath)
         {
             try
             {
@@ -42,13 +42,15 @@ namespace SolidworksAPIControl
                     );
 
                 SolidworksApp.CloseDoc(filePath);
+                return exportFilePath;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+                return e.ToString();
             }
         }
-        public void ExportPdf(string filePath, string exportFilePath)
+        public string ExportPdf(string filePath, string exportFilePath)
         {
             try
             {
@@ -82,13 +84,15 @@ namespace SolidworksAPIControl
                     );
 
                 SolidworksApp.CloseDoc(filePath);
+                return exportFilePath;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+                return e.ToString();
             }
         }
-        public void ExportStep(string filePath, string exportFilePath)
+        public string ExportStep(string filePath, string exportFilePath)
         {
             try
             {
@@ -124,14 +128,16 @@ namespace SolidworksAPIControl
                     ref FileWarning
                     );
                 SolidworksApp.CloseDoc(filePath);
+                return exportFilePath;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+                return e.ToString();
             }
 
         }
-        public void ExportIges(string filePath, string exportFilePath)
+        public string ExportIges(string filePath, string exportFilePath)
         {
             try
             {
@@ -167,13 +173,15 @@ namespace SolidworksAPIControl
                     ref FileWarning
                     );
                 SolidworksApp.CloseDoc(filePath);
+                return exportFilePath;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+                return e.ToString();
             }
         }
-        public void ExportStl(string filePath, string exportFilePath)
+        public string ExportStl(string filePath, string exportFilePath)
         {
             try
             {
@@ -208,10 +216,12 @@ namespace SolidworksAPIControl
                     ref FileWarning
                     );
                 SolidworksApp.CloseDoc(filePath);
+                return exportFilePath;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+                return e.ToString();
             }
 
         }
