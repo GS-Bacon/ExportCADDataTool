@@ -184,7 +184,7 @@ namespace WindowsFormsApp1
         {
 
         }
-        private void ExportFiles(string[] exportFolderPath)
+        private string[] ExportFiles(string[] exportFolderPath)
         {
             progressBar1.Maximum = listBox1.Items.Count;
             progressBar1.Minimum = 0;
@@ -226,6 +226,7 @@ namespace WindowsFormsApp1
                 }
                 progressBar1.Value = i + 1;
             }
+            return AllExportPaht;
 
         }
         private string[] MakeExportExtensionFolder(string exportpath, bool[] exportoption)
