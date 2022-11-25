@@ -189,7 +189,7 @@ namespace WindowsFormsApp1
             progressBar1.Maximum = listBox1.Items.Count;
             progressBar1.Minimum = 0;
             progressBar1.Value = 0;
-            Debug.Print("save dxf path:" + exportFolderPath[1] + "\n");
+            string[] AllExportPaht=null;
             for (int i = 0; i < listBox1.Items.Count; i++)
             {
                 string filepath = (string)listBox1.Items[i];
@@ -200,26 +200,26 @@ namespace WindowsFormsApp1
                     case ".SLDDRW":
                         if (CheckPdf.Checked == true)
                         {
-                            SolidworksFileExport.ExportPdf(filepath, (string)exportFolderPath[0]);
+                            AllExportPaht[i]= SolidworksFileExport.ExportPdf(filepath, (string)exportFolderPath[0]);
                         }
                         if (CheckDxf.Checked == true)
                         {
-                            SolidworksFileExport.ExportDxf(filepath, (string)exportFolderPath[1]);
+                            AllExportPaht[i] = SolidworksFileExport.ExportDxf(filepath, (string)exportFolderPath[1]);
                         }
 
                         break;
                     case ".SLDPRT":
                         if (CheckIges.Checked == true)
                         {
-                            SolidworksFileExport.ExportIges(filepath, (string)exportFolderPath[2]);
+                            AllExportPaht[i] = SolidworksFileExport.ExportIges(filepath, (string)exportFolderPath[2]);
                         }
                         if (CheckStep.Checked == true)
                         {
-                            SolidworksFileExport.ExportStep(filepath, (string)exportFolderPath[3]);
+                            AllExportPaht[i] = SolidworksFileExport.ExportStep(filepath, (string)exportFolderPath[3]);
                         }
                         if (CheckStl.Checked == true)
                         {
-                            SolidworksFileExport.ExportStl(filepath, (string)exportFolderPath[4]);
+                            AllExportPaht[i] = SolidworksFileExport.ExportStl(filepath, (string)exportFolderPath[4]);
                         }
                         break;
 
