@@ -184,6 +184,23 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void ExportFolder_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void listBox1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+        }
+
+        private void listBox1_DragDrop(object sender, DragEventArgs e)
+        {
+            foreach (string item in (string[])e.Data.GetData(DataFormats.FileDrop))
+            {
+                listBox1.Items.Add(item);
+            }
+        }
     }
 }
 
