@@ -15,14 +15,14 @@ using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
-using SolidworksAPIControl;
+using FileExport;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
         SldWorks swapp = new SldWorks();
-        SolidworksAPIControl.FileExport SolidworksFileExport = new SolidworksAPIControl.FileExport();
+        Filexeport unko = new Filexeport();
         public Form1()
         {
             InitializeComponent();
@@ -164,7 +164,7 @@ namespace WindowsFormsApp1
             }
             if (ExportExtensionFolder.Checked == true)
             {
-                savepath = MakeExportExtensionFolder(exportpath, CheckExportExtension());
+                savepath = FileExport.Filexeport.MakeExportExtensionFolder(exportpath, FileExport.Filexeport.CheckExportExtension());
             }
             else
             {
@@ -174,7 +174,7 @@ namespace WindowsFormsApp1
                 }
             }
             //GoBotton.Enabled = false;
-            ExportFiles(savepath);
+            FileExport.Filexeport.ExportFiles(savepath);
 
             TaskCompleteDialog();
 
@@ -201,6 +201,7 @@ namespace WindowsFormsApp1
                 listBox1.Items.Add(item);
             }
         }
+
     }
 }
 

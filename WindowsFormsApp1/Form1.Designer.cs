@@ -374,30 +374,30 @@
 
         private System.Windows.Forms.Button GetFilePathBotton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.CheckBox CheckDxf;
-        private System.Windows.Forms.CheckBox CheckStep;
-        private System.Windows.Forms.CheckBox CheckIges;
-        private System.Windows.Forms.CheckBox CheckStl;
-        private System.Windows.Forms.CheckBox CheckPdf;
-        private System.Windows.Forms.CheckBox NoMoveExportfile;
         private System.Windows.Forms.GroupBox ExportModeDataType;
         private System.Windows.Forms.GroupBox ExportDocDataType;
         private System.Windows.Forms.GroupBox ExportOptions;
-        private System.Windows.Forms.CheckBox MoveExportFile;
-        private System.Windows.Forms.ListBox ExportFolder;
-        private System.Windows.Forms.CheckBox ExportExtensionFolder;
         private System.Windows.Forms.Button CancelBotton;
         private System.Windows.Forms.Button GoBotton;
         private System.Windows.Forms.Button ExportFolderBotton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button MakeZipFileBotton;
-        private System.Windows.Forms.ListBox MakeZipFileFolder;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.GroupBox FileSelect;
         private System.Windows.Forms.OpenFileDialog ExportFileDialog;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        public System.Windows.Forms.ProgressBar progressBar1;
+        public System.Windows.Forms.ListBox listBox1;
+        public System.Windows.Forms.CheckBox CheckDxf;
+        public System.Windows.Forms.CheckBox CheckStep;
+        public System.Windows.Forms.CheckBox CheckIges;
+        public System.Windows.Forms.CheckBox CheckStl;
+        public System.Windows.Forms.CheckBox CheckPdf;
+        public System.Windows.Forms.CheckBox NoMoveExportfile;
+        public System.Windows.Forms.CheckBox MoveExportFile;
+        public System.Windows.Forms.ListBox ExportFolder;
+        public System.Windows.Forms.CheckBox ExportExtensionFolder;
+        public System.Windows.Forms.ListBox MakeZipFileFolder;
+        public System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
