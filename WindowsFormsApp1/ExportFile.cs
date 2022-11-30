@@ -2,52 +2,61 @@
 using System.Windows.Forms;
 using System;
 using WindowsFormsApp1;
+using SolidWorks.Interop.sldworks;
+using SolidWorks.Interop.swconst;
+using SolidworksAPIControl;
+using WindowsFormsApp1;
 
-namespace WindowsFormsApp1
+namespace FileExport
 {
-    public partial class Form1 : Form
+
+    public partial class Filexeport
     {
-        private string[] ExportFiles(string[] exportFolderPath)
+        SldWorks swapp = new SldWorks();
+        public Form1 form;
+        SolidworksAPIControl.FileExport SolidworksFileExport = new SolidworksAPIControl.FileExport();
+
+        private string[] ExportFiles(string[] exportFolderPath, string[] fileList)
         {
-            progressBar1.Maximum = listBox1.Items.Count;
-            progressBar1.Minimum = 0;
-            progressBar1.Value = 0;
+            form.progressBar1.Maximum = form.listBox1.Items.Count;
+            form.progressBar1.Minimum = 0;
+            form.progressBar1.Value = 0;
             string[] AllExportPaht = null;
-            for (int i = 0; i < listBox1.Items.Count; i++)
+            for (int i = 0; i < fileList.Length; i++)
             {
-                string filepath = (string)listBox1.Items[i];
+                string filepath = fileList[i];
                 string fileExtension = Path.GetExtension(filepath);
 
                 switch (fileExtension)
                 {
                     case ".SLDDRW":
-                        if (CheckPdf.Checked == true)
+                        if (form.CheckPdf.Checked == true)
                         {
                             AllExportPaht[i] = SolidworksFileExport.ExportPdf(filepath, (string)exportFolderPath[0]);
                         }
-                        if (CheckDxf.Checked == true)
+                        if (form.CheckDxf.Checked == true)
                         {
                             AllExportPaht[i] = SolidworksFileExport.ExportDxf(filepath, (string)exportFolderPath[1]);
                         }
 
                         break;
                     case ".SLDPRT":
-                        if (CheckIges.Checked == true)
+                        if (form.CheckIges.Checked == true)
                         {
                             AllExportPaht[i] = SolidworksFileExport.ExportIges(filepath, (string)exportFolderPath[2]);
                         }
-                        if (CheckStep.Checked == true)
+                        if (form.CheckStep.Checked == true)
                         {
                             AllExportPaht[i] = SolidworksFileExport.ExportStep(filepath, (string)exportFolderPath[3]);
                         }
-                        if (CheckStl.Checked == true)
+                        if (form.CheckStl.Checked == true)
                         {
                             AllExportPaht[i] = SolidworksFileExport.ExportStl(filepath, (string)exportFolderPath[4]);
                         }
                         break;
 
                 }
-                progressBar1.Value = i + 1;
+                form.progressBar1.Value = i + 1;
             }
             return AllExportPaht;
 
@@ -80,26 +89,33 @@ namespace WindowsFormsApp1
             DialogResult result = MessageBox.Show("変換作業を続行しますか？", "変換完了", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)
             {
-                progressBar1.Value = 0;
-                listBox1.Items.Clear();
-                ExportFolder.Items.Clear();
+                form.progressBar1.Value = 0;
+                form.listBox1.Items.Clear();
+                form.ExportFolder.Items.Clear();
             }
             if (result == DialogResult.No)
             {
-                this.Close();
+                form.Close();
             }
         }
         private bool[] CheckExportExtension()
         {
             bool[] Exportoption = new bool[5];
 
-            Exportoption[0] = CheckPdf.Checked;
-            Exportoption[1] = CheckDxf.Checked;
-            Exportoption[2] = CheckIges.Checked;
-            Exportoption[3] = CheckStep.Checked;
-            Exportoption[4] = CheckStl.Checked;
+            Exportoption[0] = form.CheckPdf.Checked;
+            Exportoption[1] = form.CheckDxf.Checked;
+            Exportoption[2] = form.CheckIges.Checked;
+            Exportoption[3] = form.CheckStep.Checked;
+            Exportoption[4] = form.CheckStl.Checked;
 
             return Exportoption;
+        }
+
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
