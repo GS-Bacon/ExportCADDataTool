@@ -5,7 +5,6 @@ using WindowsFormsApp1;
 using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
 using SolidworksAPIControl;
-using WindowsFormsApp1;
 
 namespace FileExport
 {
@@ -16,7 +15,7 @@ namespace FileExport
         public Form1 form;
         SolidworksAPIControl.FileExport SolidworksFileExport = new SolidworksAPIControl.FileExport();
 
-        private string[] ExportFiles(string[] exportFolderPath, string[] fileList)
+        public string[] ExportFiles(string[] exportFolderPath, string[] fileList)
         {
             form.progressBar1.Maximum = form.listBox1.Items.Count;
             form.progressBar1.Minimum = 0;
@@ -61,7 +60,7 @@ namespace FileExport
             return AllExportPaht;
 
         }
-        private string[] MakeExportExtensionFolder(string exportpath, bool[] exportoption)
+        public string[] MakeExportExtensionFolder(string exportpath, bool[] exportoption)
         {
             string[] exportfolder = new string[5];
             string[] exporextension = new string[5] { "pdf", "dxf", "igs", "step", "stl" };
@@ -84,7 +83,7 @@ namespace FileExport
 
         }
 
-        private void TaskCompleteDialog()
+        public void TaskCompleteDialog()
         {
             DialogResult result = MessageBox.Show("変換作業を続行しますか？", "変換完了", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)
@@ -98,7 +97,7 @@ namespace FileExport
                 form.Close();
             }
         }
-        private bool[] CheckExportExtension()
+        public bool[] CheckExportExtension()
         {
             bool[] Exportoption = new bool[5];
 

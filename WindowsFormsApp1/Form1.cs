@@ -22,7 +22,7 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         SldWorks swapp = new SldWorks();
-        Filexeport unko = new Filexeport();
+        Filexeport flexp = new Filexeport();
         public Form1()
         {
             InitializeComponent();
@@ -153,6 +153,7 @@ namespace WindowsFormsApp1
         {
             string[] savepath = new string[5];
             string exportpath;
+            string[] filelist= new string[1];
             //StartSldworks();
             if (NoMoveExportfile.Checked == true)
             {
@@ -164,7 +165,7 @@ namespace WindowsFormsApp1
             }
             if (ExportExtensionFolder.Checked == true)
             {
-                savepath = FileExport.Filexeport.MakeExportExtensionFolder(exportpath, FileExport.Filexeport.CheckExportExtension());
+                savepath = flexp.MakeExportExtensionFolder(exportpath, flexp.CheckExportExtension());
             }
             else
             {
@@ -173,10 +174,15 @@ namespace WindowsFormsApp1
                     savepath[i] = exportpath;
                 }
             }
-            //GoBotton.Enabled = false;
-            FileExport.Filexeport.ExportFiles(savepath);
+            Array.Resize(ref filelist, listBox1.Items.Count);
 
-            TaskCompleteDialog();
+            for (var i = 0;i<listBox1.Items.Count;i++)
+            {
+                filelist[i]=(string)listBox1.Items[i];
+            }
+            //GoBotton.Enabled = false;
+            flexp.ExportFiles(savepath, filelist);
+            flexp.TaskCompleteDialog();
 
         }
 
