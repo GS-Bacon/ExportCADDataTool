@@ -1,37 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Microsoft.WindowsAPICodePack.Shell;
-using SolidWorks.Interop.sldworks;
-using SolidWorks.Interop.swconst;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
-using FileExport;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        SldWorks swapp = new SldWorks();
-        Filexeport flexp = new Filexeport();
+        FileExeport fileExeport =new FileExeport();
+
+       public void Form1_Load(object sender, EventArgs e)
+       {
+           FileExeport MyClassObj = new FileExeport();
+           MyClassObj.Form1Obj= this;
+       }
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -47,18 +37,9 @@ namespace WindowsFormsApp1
 
                     // リストボックスにファイル名を表示
                     listBox1.Items.Add(strFileName);
+
                 }
             }
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -151,42 +132,56 @@ namespace WindowsFormsApp1
 
         private void GoBotton_Click(object sender, EventArgs e)
         {
-            string[] savepath = new string[5];
-            string exportpath;
-            string[] filelist= new string[1];
+            string[] SavePath = new string[5];
+            string ExportPath;
+            string[] Filelist= new string[1];
+            string[] ExportFilelist= new string[1];
+            bool[] Exportoption = new bool[5];
+
+            Exportoption[0] = CheckPdf.Checked;
+            Exportoption[1] = CheckDxf.Checked;
+            Exportoption[2] = CheckIges.Checked;
+            Exportoption[3] = CheckStep.Checked;
+            Exportoption[4] = CheckStl.Checked;
+
             //StartSldworks();
             if (NoMoveExportfile.Checked == true)
             {
-                exportpath = Path.GetDirectoryName((string)listBox1.Items[0]);
+                ExportPath = Path.GetDirectoryName((string)listBox1.Items[0]);
             }
             else
             {
-                exportpath = (string)ExportFolder.Items[0];
+                ExportPath = (string)ExportFolder.Items[0];
             }
             if (ExportExtensionFolder.Checked == true)
             {
-                savepath = flexp.MakeExportExtensionFolder(exportpath, flexp.CheckExportExtension());
+                SavePath =  FileExeport.MakeExportExtensionFolder(ExportPath, Exportoption);
             }
             else
             {
-                for (var i = 0; i < savepath.Length; i++)
+                for (var i = 0; i < SavePath.Length; i++)
                 {
-                    savepath[i] = exportpath;
+                    SavePath[i] = ExportPath;
                 }
             }
-            Array.Resize(ref filelist, listBox1.Items.Count);
+            Array.Resize(ref Filelist, listBox1.Items.Count);
 
             for (var i = 0;i<listBox1.Items.Count;i++)
             {
-                filelist[i]=(string)listBox1.Items[i];
+                Filelist[i]=(string)listBox1.Items[i];
             }
             //GoBotton.Enabled = false;
-            flexp.ExportFiles(savepath, filelist);
-            flexp.TaskCompleteDialog();
+            ExportFilelist=fileExeport.ExportFiles(SavePath, Filelist,Exportoption);
+
+            for (var i=0;i<ExportFilelist.Length; i++)
+            {
+                Debug.Print(ExportFilelist[i]);
+            }
+            TaskCompleteDialog();
 
         }
 
-        private void CheckDxf_CheckedChanged(object sender, EventArgs e)
+        public void CheckDxf_CheckedChanged(object sender, EventArgs e)
         {
 
         }
@@ -208,6 +203,24 @@ namespace WindowsFormsApp1
             }
         }
 
+        public void CheckPdf_CheckedChanged(object sender, EventArgs e)
+        {
+        }
+
+        public void TaskCompleteDialog()
+        {
+            DialogResult result = MessageBox.Show("変換作業を続行しますか？", "変換完了", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.Yes)
+            {
+                progressBar1.Value = 0;
+                listBox1.Items.Clear();
+                ExportFolder.Items.Clear();
+            }
+            if (result == DialogResult.No)
+            {
+                Close();
+            }
+        }
     }
 }
 

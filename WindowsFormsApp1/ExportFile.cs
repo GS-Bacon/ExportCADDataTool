@@ -5,62 +5,66 @@ using WindowsFormsApp1;
 using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
 using SolidworksAPIControl;
+using System.Windows.Forms.VisualStyles;
+using System.Diagnostics;
 
-namespace FileExport
+namespace WindowsFormsApp1
 {
 
-    public partial class Filexeport
+    public class FileExeport
     {
-        SldWorks swapp = new SldWorks();
-        public Form1 form;
-        SolidworksAPIControl.FileExport SolidworksFileExport = new SolidworksAPIControl.FileExport();
-
-        public string[] ExportFiles(string[] exportFolderPath, string[] fileList)
+        SolidworksFileExeport solidworksFieExport = new SolidworksFileExeport();
+        public Form1 Form1Obj { get; set; }
+        public void MyClass(Form1 Form1_Obj)
         {
-            form.progressBar1.Maximum = form.listBox1.Items.Count;
-            form.progressBar1.Minimum = 0;
-            form.progressBar1.Value = 0;
-            string[] AllExportPaht = null;
+            Form1Obj = Form1_Obj;
+        }
+        public  string[] ExportFiles(string[] exportFolderPath, string[] fileList, bool[] checkExtension)
+        {
+
+            string[] AllExportPaht=new string[1];
+            Array.Resize(ref AllExportPaht, fileList.Length);
             for (int i = 0; i < fileList.Length; i++)
             {
                 string filepath = fileList[i];
                 string fileExtension = Path.GetExtension(filepath);
+                string test;
+
 
                 switch (fileExtension)
                 {
                     case ".SLDDRW":
-                        if (form.CheckPdf.Checked == true)
+                        if (checkExtension[0] == true)
                         {
-                            AllExportPaht[i] = SolidworksFileExport.ExportPdf(filepath, (string)exportFolderPath[0]);
+                            AllExportPaht[i] = solidworksFieExport.ExportPdf(filepath, (string)exportFolderPath[0]);
                         }
-                        if (form.CheckDxf.Checked == true)
+                        if (checkExtension[1] == true)
                         {
-                            AllExportPaht[i] = SolidworksFileExport.ExportDxf(filepath, (string)exportFolderPath[1]);
+                            AllExportPaht[i] = solidworksFieExport.ExportDxf(filepath, (string)exportFolderPath[1]);
                         }
 
                         break;
                     case ".SLDPRT":
-                        if (form.CheckIges.Checked == true)
+                        if (checkExtension[2] == true)
                         {
-                            AllExportPaht[i] = SolidworksFileExport.ExportIges(filepath, (string)exportFolderPath[2]);
+                            AllExportPaht[i] = solidworksFieExport.ExportIges(filepath, (string)exportFolderPath[2]);
                         }
-                        if (form.CheckStep.Checked == true)
+                        if (checkExtension[3] == true)
                         {
-                            AllExportPaht[i] = SolidworksFileExport.ExportStep(filepath, (string)exportFolderPath[3]);
+                            AllExportPaht[i] = solidworksFieExport.ExportStep(filepath, (string)exportFolderPath[3]);
                         }
-                        if (form.CheckStl.Checked == true)
+                        if (checkExtension[4] == true)
                         {
-                            AllExportPaht[i] = SolidworksFileExport.ExportStl(filepath, (string)exportFolderPath[4]);
+                            AllExportPaht[i] = solidworksFieExport.ExportStl(filepath, (string)exportFolderPath[4]);
                         }
                         break;
 
                 }
-                form.progressBar1.Value = i + 1;
             }
             return AllExportPaht;
 
         }
-        public string[] MakeExportExtensionFolder(string exportpath, bool[] exportoption)
+        public static string[] MakeExportExtensionFolder(string exportpath, bool[] exportoption)
         {
             string[] exportfolder = new string[5];
             string[] exporextension = new string[5] { "pdf", "dxf", "igs", "step", "stl" };
@@ -83,38 +87,6 @@ namespace FileExport
 
         }
 
-        public void TaskCompleteDialog()
-        {
-            DialogResult result = MessageBox.Show("変換作業を続行しますか？", "変換完了", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if (result == DialogResult.Yes)
-            {
-                form.progressBar1.Value = 0;
-                form.listBox1.Items.Clear();
-                form.ExportFolder.Items.Clear();
-            }
-            if (result == DialogResult.No)
-            {
-                form.Close();
-            }
-        }
-        public bool[] CheckExportExtension()
-        {
-            bool[] Exportoption = new bool[5];
 
-            Exportoption[0] = form.CheckPdf.Checked;
-            Exportoption[1] = form.CheckDxf.Checked;
-            Exportoption[2] = form.CheckIges.Checked;
-            Exportoption[3] = form.CheckStep.Checked;
-            Exportoption[4] = form.CheckStl.Checked;
-
-            return Exportoption;
-        }
-
-
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

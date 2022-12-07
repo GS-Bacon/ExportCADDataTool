@@ -5,7 +5,7 @@ using System;
 
 namespace SolidworksAPIControl
 {
-    public class FileExport
+    public class SolidworksFileExeport
     {
         SldWorks SolidworksApp = new SldWorks();
         public string ExportDxf(string filePath, string exportFilePath)
