@@ -142,6 +142,7 @@
             this.CheckPdf.TabIndex = 13;
             this.CheckPdf.Text = "pdf";
             this.CheckPdf.UseVisualStyleBackColor = true;
+            this.CheckPdf.CheckedChanged += new System.EventHandler(this.CheckPdf_CheckedChanged);
             // 
             // NoMoveExportfile
             // 
