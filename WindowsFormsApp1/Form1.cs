@@ -170,13 +170,9 @@ namespace WindowsFormsApp1
             {
                 Filelist[i]=(string)listBox1.Items[i];
             }
-            //GoBotton.Enabled = false;
-            ExportFilelist=fileExeport.ExportFiles(SavePath, Filelist,Exportoption);
 
-            for (var i=0;i<ExportFilelist.Length; i++)
-            {
-                Debug.Print(ExportFilelist[i]);
-            }
+
+            ExportFilelist=fileExeport.ExportFiles(SavePath, Filelist,Exportoption);
             TaskCompleteDialog();
 
         }
