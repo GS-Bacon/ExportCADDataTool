@@ -285,7 +285,6 @@
             // 
             // MakeZipFileBotton
             // 
-            this.MakeZipFileBotton.Enabled = false;
             this.MakeZipFileBotton.Location = new System.Drawing.Point(293, 62);
             this.MakeZipFileBotton.Name = "MakeZipFileBotton";
             this.MakeZipFileBotton.Size = new System.Drawing.Size(55, 19);
@@ -296,11 +295,10 @@
             // 
             // MakeZipFileFolder
             // 
-            this.MakeZipFileFolder.Enabled = false;
             this.MakeZipFileFolder.FormattingEnabled = true;
             this.MakeZipFileFolder.HorizontalScrollbar = true;
             this.MakeZipFileFolder.ItemHeight = 12;
-            this.MakeZipFileFolder.Location = new System.Drawing.Point(6, 62);
+            this.MakeZipFileFolder.Location = new System.Drawing.Point(0, 62);
             this.MakeZipFileFolder.Name = "MakeZipFileFolder";
             this.MakeZipFileFolder.Size = new System.Drawing.Size(280, 40);
             this.MakeZipFileFolder.TabIndex = 20;
@@ -309,13 +307,13 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Enabled = false;
             this.checkBox1.Location = new System.Drawing.Point(6, 40);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(255, 16);
             this.checkBox1.TabIndex = 18;
             this.checkBox1.Text = "以下のフォルダに部品ごとのZipファイルを生成する";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // FileSelect
             // 

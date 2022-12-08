@@ -10,6 +10,7 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         FileExeport fileExeport =new FileExeport();
+        Zipping zipping=new Zipping();
 
        public void Form1_Load(object sender, EventArgs e)
        {
@@ -171,8 +172,8 @@ namespace WindowsFormsApp1
                 Filelist[i]=(string)listBox1.Items[i];
             }
 
-
             ExportFilelist=fileExeport.ExportFiles(SavePath, Filelist,Exportoption);
+            zipping.MakeZipFile(ExportFilelist, (string)MakeZipFileFolder.Items[0]);
             TaskCompleteDialog();
 
         }
@@ -216,6 +217,11 @@ namespace WindowsFormsApp1
             {
                 Close();
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
