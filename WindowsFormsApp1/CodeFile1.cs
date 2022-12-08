@@ -23,10 +23,10 @@ namespace WindowsFormsApp1
                 FileNameList[i] = Path.GetFileNameWithoutExtension(@FilePath[i]);
             }
             FileNameList.Distinct();
-            
-            for(var i=0;i< FileNameList.Length;i++)
+
+            for (var i = 0; i < FileNameList.Length; i++)
             {
-                ZipFile
+            }
         }
     }
 }
