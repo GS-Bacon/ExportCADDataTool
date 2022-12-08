@@ -285,6 +285,7 @@
             // 
             // MakeZipFileBotton
             // 
+            this.MakeZipFileBotton.Enabled = false;
             this.MakeZipFileBotton.Location = new System.Drawing.Point(293, 62);
             this.MakeZipFileBotton.Name = "MakeZipFileBotton";
             this.MakeZipFileBotton.Size = new System.Drawing.Size(55, 19);
