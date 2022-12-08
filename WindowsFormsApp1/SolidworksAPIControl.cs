@@ -5,7 +5,7 @@ using System;
 
 namespace SolidworksAPIControl
 {
-    public class FileExport
+    public class SolidworksFileExeport
     {
         SldWorks SolidworksApp = new SldWorks();
         public string ExportDxf(string filePath, string exportFilePath)
@@ -42,7 +42,7 @@ namespace SolidworksAPIControl
                     );
 
                 SolidworksApp.CloseDoc(filePath);
-                return exportFilePath;
+                return ExportFilePath;
             }
             catch (Exception e)
             {
@@ -84,7 +84,7 @@ namespace SolidworksAPIControl
                     );
 
                 SolidworksApp.CloseDoc(filePath);
-                return exportFilePath;
+                return ExportFilePath;
             }
             catch (Exception e)
             {
@@ -128,7 +128,7 @@ namespace SolidworksAPIControl
                     ref FileWarning
                     );
                 SolidworksApp.CloseDoc(filePath);
-                return exportFilePath;
+                return ExportFilePath;
             }
             catch (Exception e)
             {
@@ -173,7 +173,7 @@ namespace SolidworksAPIControl
                     ref FileWarning
                     );
                 SolidworksApp.CloseDoc(filePath);
-                return exportFilePath;
+                return ExportFilePath;
             }
             catch (Exception e)
             {
@@ -216,7 +216,7 @@ namespace SolidworksAPIControl
                     ref FileWarning
                     );
                 SolidworksApp.CloseDoc(filePath);
-                return exportFilePath;
+                return ExportFilePath;
             }
             catch (Exception e)
             {

@@ -142,6 +142,7 @@
             this.CheckPdf.TabIndex = 13;
             this.CheckPdf.Text = "pdf";
             this.CheckPdf.UseVisualStyleBackColor = true;
+            this.CheckPdf.CheckedChanged += new System.EventHandler(this.CheckPdf_CheckedChanged);
             // 
             // NoMoveExportfile
             // 
@@ -295,11 +296,10 @@
             // 
             // MakeZipFileFolder
             // 
-            this.MakeZipFileFolder.Enabled = false;
             this.MakeZipFileFolder.FormattingEnabled = true;
             this.MakeZipFileFolder.HorizontalScrollbar = true;
             this.MakeZipFileFolder.ItemHeight = 12;
-            this.MakeZipFileFolder.Location = new System.Drawing.Point(6, 62);
+            this.MakeZipFileFolder.Location = new System.Drawing.Point(0, 62);
             this.MakeZipFileFolder.Name = "MakeZipFileFolder";
             this.MakeZipFileFolder.Size = new System.Drawing.Size(280, 40);
             this.MakeZipFileFolder.TabIndex = 20;
@@ -308,13 +308,13 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Enabled = false;
             this.checkBox1.Location = new System.Drawing.Point(6, 40);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(255, 16);
             this.checkBox1.TabIndex = 18;
             this.checkBox1.Text = "以下のフォルダに部品ごとのZipファイルを生成する";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // FileSelect
             // 
@@ -374,30 +374,30 @@
 
         private System.Windows.Forms.Button GetFilePathBotton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.CheckBox CheckDxf;
-        private System.Windows.Forms.CheckBox CheckStep;
-        private System.Windows.Forms.CheckBox CheckIges;
-        private System.Windows.Forms.CheckBox CheckStl;
-        private System.Windows.Forms.CheckBox CheckPdf;
-        private System.Windows.Forms.CheckBox NoMoveExportfile;
         private System.Windows.Forms.GroupBox ExportModeDataType;
         private System.Windows.Forms.GroupBox ExportDocDataType;
         private System.Windows.Forms.GroupBox ExportOptions;
-        private System.Windows.Forms.CheckBox MoveExportFile;
-        private System.Windows.Forms.ListBox ExportFolder;
-        private System.Windows.Forms.CheckBox ExportExtensionFolder;
         private System.Windows.Forms.Button CancelBotton;
         private System.Windows.Forms.Button GoBotton;
         private System.Windows.Forms.Button ExportFolderBotton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button MakeZipFileBotton;
-        private System.Windows.Forms.ListBox MakeZipFileFolder;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.GroupBox FileSelect;
         private System.Windows.Forms.OpenFileDialog ExportFileDialog;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        public System.Windows.Forms.ProgressBar progressBar1;
+        public System.Windows.Forms.ListBox listBox1;
+        public System.Windows.Forms.CheckBox CheckDxf;
+        public System.Windows.Forms.CheckBox CheckStep;
+        public System.Windows.Forms.CheckBox CheckIges;
+        public System.Windows.Forms.CheckBox CheckStl;
+        public System.Windows.Forms.CheckBox CheckPdf;
+        public System.Windows.Forms.CheckBox NoMoveExportfile;
+        public System.Windows.Forms.CheckBox MoveExportFile;
+        public System.Windows.Forms.ListBox ExportFolder;
+        public System.Windows.Forms.CheckBox ExportExtensionFolder;
+        public System.Windows.Forms.ListBox MakeZipFileFolder;
+        public System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
