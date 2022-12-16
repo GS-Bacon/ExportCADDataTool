@@ -7,6 +7,7 @@ using SolidWorks.Interop.swconst;
 using SolidworksAPIControl;
 using System.Windows.Forms.VisualStyles;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace WindowsFormsApp1
 {
@@ -19,11 +20,10 @@ namespace WindowsFormsApp1
         {
             Form1Obj = Form1_Obj;
         }
-        public  string[] ExportFiles(string[] exportFolderPath, string[] fileList, bool[] checkExtension)
+        public  List<string> ExportFiles(string[] exportFolderPath, string[] fileList, bool[] checkExtension)
         {
 
-            string[] AllExportPaht=new string[1];
-            Array.Resize(ref AllExportPaht, fileList.Length);
+            List<string> AllExportPaht=new List<string>();
             for (int i = 0; i < fileList.Length; i++)
             {
                 string filepath = fileList[i];
@@ -36,26 +36,26 @@ namespace WindowsFormsApp1
                     case ".SLDDRW":
                         if (checkExtension[0] == true)
                         {
-                            AllExportPaht[i] = solidworksFieExport.ExportPdf(filepath, (string)exportFolderPath[0]);
+                            AllExportPaht.Add(solidworksFieExport.ExportPdf(filepath, (string)exportFolderPath[0]));
                         }
                         if (checkExtension[1] == true)
                         {
-                            AllExportPaht[i] = solidworksFieExport.ExportDxf(filepath, (string)exportFolderPath[1]);
+                            AllExportPaht.Add(solidworksFieExport.ExportDxf(filepath, (string)exportFolderPath[1]));
                         }
 
                         break;
                     case ".SLDPRT":
                         if (checkExtension[2] == true)
                         {
-                            AllExportPaht[i] = solidworksFieExport.ExportIges(filepath, (string)exportFolderPath[2]);
+                            AllExportPaht.Add(solidworksFieExport.ExportIges(filepath, (string)exportFolderPath[2]));
                         }
                         if (checkExtension[3] == true)
                         {
-                            AllExportPaht[i] = solidworksFieExport.ExportStep(filepath, (string)exportFolderPath[3]);
+                            AllExportPaht.Add(solidworksFieExport.ExportStep(filepath, (string)exportFolderPath[3]));
                         }
                         if (checkExtension[4] == true)
                         {
-                            AllExportPaht[i] = solidworksFieExport.ExportStl(filepath, (string)exportFolderPath[4]);
+                            AllExportPaht.Add(solidworksFieExport.ExportStl(filepath, (string)exportFolderPath[4]));
                         }
                         break;
 

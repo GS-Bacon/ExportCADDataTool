@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -136,7 +137,7 @@ namespace WindowsFormsApp1
             string[] SavePath = new string[5];
             string ExportPath;
             string[] Filelist= new string[1];
-            string[] ExportFilelist= new string[1];
+            List<string> ExportFilelist= new List<string>();
             bool[] Exportoption = new bool[5];
 
             Exportoption[0] = CheckPdf.Checked;
