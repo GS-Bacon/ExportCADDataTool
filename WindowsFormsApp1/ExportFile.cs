@@ -23,12 +23,10 @@ namespace WindowsFormsApp1
         {
 
             string[] AllExportPaht=new string[1];
-            Array.Resize(ref AllExportPaht, fileList.Length);
             for (int i = 0; i < fileList.Length; i++)
             {
                 string filepath = fileList[i];
                 string fileExtension = Path.GetExtension(filepath);
-                string test;
 
 
                 switch (fileExtension)
@@ -36,31 +34,40 @@ namespace WindowsFormsApp1
                     case ".SLDDRW":
                         if (checkExtension[0] == true)
                         {
-                            AllExportPaht[i] = solidworksFieExport.ExportPdf(filepath, (string)exportFolderPath[0]);
+                            AllExportPaht[AllExportPaht.Length - 1] = solidworksFieExport.ExportPdf(filepath, (string)exportFolderPath[0]);
+                            Array.Resize(ref AllExportPaht, AllExportPaht.Length + 1);
+                          
                         }
                         if (checkExtension[1] == true)
                         {
-                            AllExportPaht[i] = solidworksFieExport.ExportDxf(filepath, (string)exportFolderPath[1]);
+                            AllExportPaht[AllExportPaht.Length - 1] = solidworksFieExport.ExportDxf(filepath, (string)exportFolderPath[1]);
+                            Array.Resize(ref AllExportPaht, AllExportPaht.Length + 1);
                         }
 
                         break;
                     case ".SLDPRT":
                         if (checkExtension[2] == true)
                         {
-                            AllExportPaht[i] = solidworksFieExport.ExportIges(filepath, (string)exportFolderPath[2]);
+                            AllExportPaht[AllExportPaht.Length - 1] = solidworksFieExport.ExportIges(filepath, (string)exportFolderPath[2]);
+                            Array.Resize(ref AllExportPaht, AllExportPaht.Length + 1);
+
                         }
                         if (checkExtension[3] == true)
                         {
-                            AllExportPaht[i] = solidworksFieExport.ExportStep(filepath, (string)exportFolderPath[3]);
+
+                            AllExportPaht[AllExportPaht.Length - 1] = solidworksFieExport.ExportStep(filepath, (string)exportFolderPath[3]);
+                            Array.Resize(ref AllExportPaht, AllExportPaht.Length + 1);                        
                         }
                         if (checkExtension[4] == true)
                         {
-                            AllExportPaht[i] = solidworksFieExport.ExportStl(filepath, (string)exportFolderPath[4]);
+                            AllExportPaht[AllExportPaht.Length - 1] = solidworksFieExport.ExportStl(filepath, (string)exportFolderPath[4]);
+                            Array.Resize(ref AllExportPaht, AllExportPaht.Length + 1);
                         }
                         break;
 
                 }
             }
+            Array.Resize(ref AllExportPaht, AllExportPaht.Length -1);
             return AllExportPaht;
 
         }
