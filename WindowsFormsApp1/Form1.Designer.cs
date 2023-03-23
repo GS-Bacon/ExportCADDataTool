@@ -50,10 +50,11 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.MakeZipFileBotton = new System.Windows.Forms.Button();
             this.MakeZipFileFolder = new System.Windows.Forms.ListBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkZip = new System.Windows.Forms.CheckBox();
             this.FileSelect = new System.Windows.Forms.GroupBox();
             this.ExportFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.ExportModeDataType.SuspendLayout();
             this.ExportDocDataType.SuspendLayout();
             this.ExportOptions.SuspendLayout();
@@ -75,6 +76,7 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // listBox1
             // 
@@ -89,6 +91,7 @@
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             this.listBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox1_DragDrop);
             this.listBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox1_DragEnter);
+            this.listBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyDown);
             // 
             // CheckDxf
             // 
@@ -274,7 +277,7 @@
             // 
             this.groupBox2.Controls.Add(this.MakeZipFileBotton);
             this.groupBox2.Controls.Add(this.MakeZipFileFolder);
-            this.groupBox2.Controls.Add(this.checkBox1);
+            this.groupBox2.Controls.Add(this.checkZip);
             this.groupBox2.Controls.Add(this.ExportExtensionFolder);
             this.groupBox2.Location = new System.Drawing.Point(255, 247);
             this.groupBox2.Name = "groupBox2";
@@ -305,16 +308,16 @@
             this.MakeZipFileFolder.TabIndex = 20;
             this.MakeZipFileFolder.SelectedIndexChanged += new System.EventHandler(this.MakeZipFileFolder_SelectedIndexChanged);
             // 
-            // checkBox1
+            // checkZip
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 40);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(255, 16);
-            this.checkBox1.TabIndex = 18;
-            this.checkBox1.Text = "以下のフォルダに部品ごとのZipファイルを生成する";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkZip.AutoSize = true;
+            this.checkZip.Location = new System.Drawing.Point(6, 40);
+            this.checkZip.Name = "checkZip";
+            this.checkZip.Size = new System.Drawing.Size(255, 16);
+            this.checkZip.TabIndex = 18;
+            this.checkZip.Text = "以下のフォルダに部品ごとのZipファイルを生成する";
+            this.checkZip.UseVisualStyleBackColor = true;
+            this.checkZip.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // FileSelect
             // 
@@ -335,17 +338,26 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(255, 385);
+            this.progressBar1.Location = new System.Drawing.Point(259, 385);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(189, 23);
-            this.progressBar1.TabIndex = 24;
-            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
+            this.progressBar1.Size = new System.Drawing.Size(183, 23);
+            this.progressBar1.TabIndex = 21;
+            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click_1);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(259, 411);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 12);
+            this.label1.TabIndex = 24;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 431);
+            this.ClientSize = new System.Drawing.Size(632, 429);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -367,6 +379,7 @@
             this.groupBox2.PerformLayout();
             this.FileSelect.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -385,7 +398,6 @@
         private System.Windows.Forms.Button MakeZipFileBotton;
         private System.Windows.Forms.GroupBox FileSelect;
         private System.Windows.Forms.OpenFileDialog ExportFileDialog;
-        public System.Windows.Forms.ProgressBar progressBar1;
         public System.Windows.Forms.ListBox listBox1;
         public System.Windows.Forms.CheckBox CheckDxf;
         public System.Windows.Forms.CheckBox CheckStep;
@@ -397,7 +409,9 @@
         public System.Windows.Forms.ListBox ExportFolder;
         public System.Windows.Forms.CheckBox ExportExtensionFolder;
         public System.Windows.Forms.ListBox MakeZipFileFolder;
-        public System.Windows.Forms.CheckBox checkBox1;
+        public System.Windows.Forms.CheckBox checkZip;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label1;
     }
 }
 

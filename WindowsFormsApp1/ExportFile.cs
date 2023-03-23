@@ -22,13 +22,19 @@ namespace WindowsFormsApp1
         }
         public  List<string> ExportFiles(string[] exportFolderPath, string[] fileList, bool[] checkExtension)
         {
+            ProgressBar progressBar1 =new ProgressBar();
+            progressBar1.Minimum= 0;
+            progressBar1.Maximum= 100;
+            progressBar1.Value= 0;
+            progressBar1.Show();
+
+            Label label1= new Label();
 
             List<string> AllExportPaht=new List<string>();
             for (int i = 0; i < fileList.Length; i++)
             {
                 string filepath = fileList[i];
                 string fileExtension = Path.GetExtension(filepath);
-                string test;
 
 
                 switch (fileExtension)
@@ -58,8 +64,11 @@ namespace WindowsFormsApp1
                             AllExportPaht.Add(solidworksFieExport.ExportStl(filepath, (string)exportFolderPath[4]));
                         }
                         break;
-
                 }
+                label1.Text = filepath;
+                progressBar1.Value = i;
+                progressBar1.Update();
+                label1.Update();
             }
             return AllExportPaht;
 

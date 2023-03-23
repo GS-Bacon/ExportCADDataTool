@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
@@ -93,13 +94,18 @@ namespace WindowsFormsApp1
 
         private void ExportFolderBotton_Click(object sender, EventArgs e)
         {
-            var OpenFileDialog = new CommonOpenFileDialog();
-            OpenFileDialog.IsFolderPicker = true;
-            if (OpenFileDialog.ShowDialog() != CommonFileDialogResult.Ok)
+            if (listBox1.Items.Count >0)
             {
-                return;
+                ExportFolder.Items.Clear();
+                var OpenFileDialog = new CommonOpenFileDialog();
+                OpenFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName((string)listBox1.Items[0]);
+                OpenFileDialog.IsFolderPicker = true;
+                if (OpenFileDialog.ShowDialog() != CommonFileDialogResult.Ok)
+                {
+                    return;
+                }
+                ExportFolder.Items.Add(OpenFileDialog.FileName);
             }
-            ExportFolder.Items.Add(OpenFileDialog.FileName);
         }
 
         private void ExportFileDialog_FileOk(object sender, CancelEventArgs e)
@@ -114,13 +120,18 @@ namespace WindowsFormsApp1
 
         private void MakeZipFileBotton_Click(object sender, EventArgs e)
         {
-            var zipfile = new CommonOpenFileDialog();
-            zipfile.IsFolderPicker = true;
-            if (zipfile.ShowDialog() != CommonFileDialogResult.Ok)
+            if (listBox1.Items.Count>0)
             {
-                return;
+                MakeZipFileFolder.Items.Clear();
+                var zipfile = new CommonOpenFileDialog();
+                zipfile.IsFolderPicker = true;
+                zipfile.InitialDirectory = System.IO.Path.GetDirectoryName((string)listBox1.Items[0]);
+                if (zipfile.ShowDialog() != CommonFileDialogResult.Ok)
+                {
+                    return;
+                }
+                MakeZipFileFolder.Items.Add(zipfile.FileName);
             }
-            MakeZipFileFolder.Items.Add(zipfile.FileName);
         }
 
         private void CancelBotton_Click(object sender, EventArgs e)
@@ -146,36 +157,46 @@ namespace WindowsFormsApp1
             Exportoption[3] = CheckStep.Checked;
             Exportoption[4] = CheckStl.Checked;
 
-            //StartSldworks();
-            if (NoMoveExportfile.Checked == true)
+            if (Exportoption.All(value => value == false))
             {
-                ExportPath = Path.GetDirectoryName((string)listBox1.Items[0]);
+
             }
-            else
+            else if(listBox1.Items.Count > 0)
             {
-                ExportPath = (string)ExportFolder.Items[0];
-            }
-            if (ExportExtensionFolder.Checked == true)
-            {
-                SavePath =  FileExeport.MakeExportExtensionFolder(ExportPath, Exportoption);
-            }
-            else
-            {
-                for (var i = 0; i < SavePath.Length; i++)
+                //StartSldworks();
+                if (NoMoveExportfile.Checked == true)
                 {
-                    SavePath[i] = ExportPath;
+                    ExportPath = Path.GetDirectoryName((string)listBox1.Items[0]);
                 }
-            }
-            Array.Resize(ref Filelist, listBox1.Items.Count);
+                else
+                {
+                    ExportPath = (string)ExportFolder.Items[0];
+                }
+                if (ExportExtensionFolder.Checked == true)
+                {
+                    SavePath = FileExeport.MakeExportExtensionFolder(ExportPath, Exportoption);
+                }
+                else
+                {
+                    for (var i = 0; i < SavePath.Length; i++)
+                    {
+                        SavePath[i] = ExportPath;
+                    }
+                }
+                Array.Resize(ref Filelist, listBox1.Items.Count);
 
-            for (var i = 0;i<listBox1.Items.Count;i++)
-            {
-                Filelist[i]=(string)listBox1.Items[i];
-            }
+                for (var i = 0; i < listBox1.Items.Count; i++)
+                {
+                    Filelist[i] = (string)listBox1.Items[i];
+                }
 
-            ExportFilelist=fileExeport.ExportFiles(SavePath, Filelist,Exportoption);
-            zipping.MakeZipFile(ExportFilelist, (string)MakeZipFileFolder.Items[0]);
-            TaskCompleteDialog();
+                ExportFilelist = fileExeport.ExportFiles(SavePath, Filelist, Exportoption);
+                if (checkZip.Checked)
+                {
+                    zipping.MakeZipFile(ExportFilelist, (string)MakeZipFileFolder.Items[0]);
+                }
+                TaskCompleteDialog();
+            }
 
         }
 
@@ -222,7 +243,7 @@ namespace WindowsFormsApp1
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox1.Checked)
+            if(checkZip.Checked)
             {
                 MakeZipFileBotton.Enabled= true;
             }
@@ -231,7 +252,45 @@ namespace WindowsFormsApp1
                 MakeZipFileBotton.Enabled = false;
             }
         }
+
+        private void listBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete) 
+            {
+                if (this.listBox1.SelectedItems.Count > 0);
+            }
+            // 現在選択している行のインデックスを取得
+            int index = this.listBox1.SelectedIndex;
+
+            if ((0 <= index) && (index < this.listBox1.Items.Count))
+            {
+                // 項目を削除
+                this.listBox1.Items.RemoveAt(index);
+
+                // 次の選択行を決定
+                if (this.listBox1.Items.Count > 0)
+                {
+                    int nextIndex = index - 1;
+                    if (this.listBox1.Items.Count > index)
+                    {
+                        nextIndex = index;
+                    }
+                    this.listBox1.SelectedIndex=nextIndex;
+                }
+            }
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void progressBar1_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+
 
 
